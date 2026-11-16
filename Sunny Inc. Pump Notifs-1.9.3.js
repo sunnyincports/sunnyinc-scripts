@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Sunny Inc. Pump Notifs
 // @namespace    https://sunnyinc.local/
-// @version      1.9.3
+// @version      1.9.4
 // @description  Sunny Inc. pump notifications now show up natively in Rugplay
 // @author       Sunny Inc. (based on work by Not_Perfect / Hoodclassic)
 // @match        *://rugplay.com/*
@@ -300,6 +300,68 @@
             placeRow(listContainer, row, notif.ts);
         });
     }
+
+    // ---- Click-through: pump toast -> straight to the coin page ----
+
+    const SYMBOL_RE = /\(\*([^)\s]+)\)/;
+
+    // Starting at the clicked element, walk up to the smallest ancestor that is a pump toast
+    // (contains the alert title and a "(*SYMBOL)" tag) and return that symbol.
+    function findPumpSymbol(start) {
+        let el = start instanceof Element ? start : start?.parentElement;
+        while (el && el !== document.body && el !== document.documentElement) {
+            const text = el.textContent || '';
+            // Stop climbing once we're clearly outside a single toast.
+            if (text.length > 400) return null;
+            if (text.includes(ALERT_TITLE)) {
+                const m = text.match(SYMBOL_RE);
+                if (m) return m[1];
+            }
+            el = el.parentElement;
+        }
+        return null;
+    }
+
+    let navigatingToCoin = false;
+
+    // Uses a real anchor click so SvelteKit does a normal client-side navigation (no full reload).
+    function goToCoin(symbol) {
+        const link = `/coin/${encodeURIComponent(symbol)}`;
+        navigatingToCoin = true;
+        try {
+            const a = document.createElement('a');
+            a.href = link;
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        } catch (e) {
+            location.href = link;
+        } finally {
+            navigatingToCoin = false;
+        }
+    }
+
+    // Capture phase on window: runs before the site's own handler that sends you to /notifications.
+    window.addEventListener('click', (e) => {
+        if (navigatingToCoin) return;
+        if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+        const target = e.target instanceof Element ? e.target : null;
+        if (!target) return;
+
+        // Rows that are already direct coin links (our rows on the notifications page) work as-is.
+        if (target.closest('a[href^="/coin/"]')) return;
+
+        const symbol = findPumpSymbol(target);
+        if (!symbol) return;
+
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        goToCoin(symbol);
+    }, true);
+
+    // ----------------------------------------------------------------
 
     unsafeWindow.WebSocket = new Proxy(OriginalWebSocket, {
         construct(target, args) {
