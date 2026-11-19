@@ -16,3 +16,5 @@ I’m not going to explain how to install a Tampermonkey script or a Stylus them
 No I won't fix anything wrong with it that you find Fix it yourself
 
 Didn't include desktop notifications 'cause I'm not that addicted to this game
+
+None of these scripts violate the Rugplay TOS as of writing this November 18th 2026
