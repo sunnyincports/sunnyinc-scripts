@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Rugplay QOL (Sunny inc. Port)
-// @namespace    sunny.inc
+// @namespace    sunny inc.
 // @version      2026-03-11
 // @description  Rugplay QOL: shows 7 recent trades in the sidebar, hides sub-$10 bot trades in the live feed, and speeds up coinflip/slots in the arcade. Original script by Not_Perfect; maintained and rebranded by Sunny inc.
 // @author       Not_Perfect (original), Sunny inc.
