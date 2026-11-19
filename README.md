@@ -1,4 +1,9 @@
 # Sunny Inc. Scripts
+<br>
+<p align="center">
+  <img src="https://github.com/sunnyincports/sunnyinc-scripts/blob/main/rugplay/rugplay.png?raw=true\" width="100%">
+</p>
+<br>
 
 ### A collection of scripts(and a theme) for Rugplay
 
