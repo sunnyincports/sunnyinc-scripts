@@ -1,12 +1,12 @@
 # Sunny Inc. Scripts
 
-### A collection of scripts for Rugplay
+### A collection of scripts(and a theme) for Rugplay
 
 Updated and ported for Sunny Inc.
 
-Credit: Original scripts from https://github.com/bahillybeans/Rugplay-stuff
+Credit: Some of the original scripts from https://github.com/bahillybeans/Rugplay-stuff but were modified
 
-I’m not going to explain how to install a Tampermonkey script. I’d really rather do anything else, so figure it out yourself.
+I’m not going to explain how to install a Tampermonkey script or a Stylus theme. I’d really rather do anything else, so figure it out yourself.
 
 No I won't fix anything wrong with it that you find Fix it yourself
 
