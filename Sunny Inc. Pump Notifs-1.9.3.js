@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Sunny Inc. Pump Notifs
-// @namespace    https://sunnyinc.local/
+// @namespace    Sunny Inc.
 // @version      1.9.4
 // @description  Sunny Inc. pump notifications now show up natively in Rugplay
 // @author       Sunny Inc. (based on work by Not_Perfect / Hoodclassic)
