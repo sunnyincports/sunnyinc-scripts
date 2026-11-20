@@ -4,6 +4,10 @@
   <img src="https://github.com/sunnyincports/sunnyinc-scripts/blob/main/rugplay/rugplay.png?raw=true\" width="100%">
 </p>
 <br>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/sunnyincports/sunnyinc-scripts/refs/heads/main/rugplay/rugplaycoin.png" width="100%">
+</p>
+<br>
 
 ### A collection of scripts(and a theme) for Rugplay
 
