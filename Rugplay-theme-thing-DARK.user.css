@@ -1,0 +1,400 @@
+/* ==UserStyle==
+@name           Make rugplay not kill your eyes
+@namespace      rugplay.com
+@version        1.11.0
+@description    for if you REALLY need that DARK in rugplay
+@author         Sunny Inc.
+==/UserStyle== */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap'); /* this is just bc my eyes don't work if you do not like this font just remove this line */
+
+@-moz-document domain("rugplay.com") {
+  /* GitHub-style dark surfaces; keep Rugplay's existing accent and market colors. */
+  :root,
+  :root.dark {
+    color-scheme: dark !important;
+    --radius: 0.375rem !important;
+
+    --background: #040404 !important;
+    --foreground: #e5e5e5 !important;
+    --card: #0e0e0e !important;
+    --card-foreground: #e5e5e5 !important;
+    --popover: #151515 !important;
+    --popover-foreground: #e5e5e5 !important;
+    --secondary: #151515 !important;
+    --secondary-foreground: #e5e5e5 !important;
+    --muted: #111111 !important;
+    --muted-foreground: #a0a0a0 !important;
+    --accent: #1c1c1c !important;
+    --accent-foreground: #f0f0f0 !important;
+    --border: #222222 !important;
+    --input: #2e2e2e !important;
+    --ring: #606060 !important;
+
+    --sidebar: #0e0e0e !important;
+    --sidebar-foreground: #e5e5e5 !important;
+    --sidebar-accent: #151515 !important;
+    --sidebar-accent-foreground: #f0f0f0 !important;
+    --sidebar-border: #222222 !important;
+    --sidebar-ring: #606060 !important;
+  }
+
+  html,
+  body {
+    background-color: var(--background) !important;
+    color: var(--foreground);
+  }
+
+  html,
+  body,
+  body * {
+    font-family: "Lato", sans-serif !important;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 35%, transparent);
+    color: var(--foreground);
+  }
+
+  /* One quiet edge on the navigation rail and the mobile page header. */
+  [data-slot="sidebar-container"] {
+    background-color: var(--sidebar) !important;
+    border-right: 1px solid var(--sidebar-border) !important;
+    box-shadow: none !important;
+  }
+
+  [data-slot="sidebar-inset"] {
+    background-color: var(--background) !important;
+  }
+
+  .sidebar-container > header {
+    background-color: color-mix(in srgb, var(--background) 94%, transparent) !important;
+    border-bottom-color: var(--border) !important;
+    box-shadow: none !important;
+  }
+
+  [data-slot="sidebar-menu-button"] {
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  [data-slot="sidebar-menu-button"]:hover,
+  [data-slot="sidebar-menu-button"][data-active="true"] {
+    background-color: var(--sidebar-accent) !important;
+    color: var(--sidebar-accent-foreground) !important;
+  }
+
+  [data-slot="sidebar-separator"] {
+    background-color: var(--sidebar-border) !important;
+  }
+
+  /* Keep cards distinct, but remove the heavy shadow and nested double borders. */
+  [data-slot="card"] {
+    background-color: var(--card);
+    border: 1px solid color-mix(in srgb, var(--border) 75%, transparent) !important;
+    box-shadow: none !important;
+  }
+
+  [data-slot="card"] [data-slot="card"] {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  [data-slot="card"]:hover {
+    box-shadow: none !important;
+  }
+
+  /* Keep the watchlist's outer panel; make the coin links flat, not pill-shaped. */
+  .container > section:has(> div > div.w-24 > h2 svg[class~="fill-yellow-400"])
+    a[href^="/coin/"] {
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0.25rem !important;
+    padding-inline: 0.15rem !important;
+  }
+
+  .container > section:has(> div > div.w-24 > h2 svg[class~="fill-yellow-400"])
+    a[href^="/coin/"]:hover {
+    background: color-mix(in srgb, var(--muted) 65%, transparent) !important;
+  }
+
+  /* Dialogs, menus, and popovers use the same quiet surface as the rest of the UI. */
+  [data-slot="dropdown-menu-content"],
+  [data-slot="popover-content"],
+  [data-slot="select-content"],
+  [data-slot="dialog-content"],
+  [data-slot="sheet-content"],
+  [data-slot="hover-card-content"] {
+    background-color: var(--popover) !important;
+    border-color: color-mix(in srgb, var(--border) 80%, transparent) !important;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 28%) !important;
+  }
+
+  /* Inputs stay easy to spot without a bright or doubled outline. */
+  [data-slot="input"],
+  [data-slot="textarea"],
+  input,
+  select,
+  textarea {
+    border-color: var(--input) !important;
+    box-shadow: none;
+  }
+
+  [data-slot="input"]:focus-visible,
+  [data-slot="textarea"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--ring) !important;
+    outline-offset: 1px;
+    box-shadow: none !important;
+  }
+
+  /* Quick Jump uses a plain input, so keep its focus cue from boxing it in. */
+  [data-slot="dialog-content"]:has(input[placeholder^="Search coins"]) {
+    background: #0e0e0e !important;
+    color: var(--foreground) !important;
+    border-color: var(--border) !important;
+  }
+
+  [data-slot="dialog-content"]:has(input[placeholder^="Search coins"])
+    input[placeholder^="Search coins"] {
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: var(--foreground) !important;
+    caret-color: var(--primary) !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  [data-slot="dialog-content"]:has(input[placeholder^="Search coins"])
+    input[placeholder^="Search coins"]:focus-visible {
+    outline: none !important;
+    box-shadow: inset 0 -2px 0 var(--ring) !important;
+  }
+
+  [data-slot="dialog-content"]:has(input[placeholder^="Search coins"])
+    input[placeholder^="Search coins"]::placeholder {
+    color: #a0a0a0 !important;
+    opacity: 1;
+  }
+
+  [data-slot="dialog-content"]:has(input[placeholder^="Search coins"])
+    [role="tablist"][aria-label="Result type"] {
+    border-bottom-color: var(--border) !important;
+  }
+
+  [data-slot="dialog-content"]:has(input[placeholder^="Search coins"])
+    [role="tablist"][aria-label="Result type"] [role="tab"]:not([aria-selected="true"]) {
+    color: #a8a8a8 !important;
+  }
+
+  [data-slot="dialog-content"]:has(input[placeholder^="Search coins"]) button[data-index] {
+    border-radius: 0.375rem !important;
+    color: var(--foreground);
+  }
+
+  [data-slot="dialog-content"]:has(input[placeholder^="Search coins"])
+    button[data-index].bg-accent {
+    background: #1c1c1c !important;
+    color: #f0f0f0 !important;
+  }
+
+  [data-slot="dialog-content"]:has(input[placeholder^="Search coins"])
+    button[data-index]:hover {
+    background: #151515 !important;
+    color: #f0f0f0 !important;
+  }
+
+  [data-slot="button"] {
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  [data-slot="button"]:focus-visible {
+    outline: 2px solid var(--ring) !important;
+    outline-offset: 2px;
+    box-shadow: none !important;
+  }
+
+  /* Make buy and sell actions unmistakable on the coin page. */
+  [data-slot="card"]:has(kbd) [data-slot="button"]:has(svg.text-green-500),
+  .sticky.bottom-0:has([data-slot="button"] svg.text-green-500)
+    [data-slot="button"]:has(svg.text-green-500) {
+    background: #193626 !important;
+    border: 1px solid #315c40 !important;
+    color: #c4f0d0 !important;
+  }
+
+  [data-slot="card"]:has(kbd) [data-slot="button"]:has(svg.text-red-500),
+  .sticky.bottom-0:has([data-slot="button"] svg.text-red-500)
+    [data-slot="button"]:has(svg.text-red-500) {
+    background: #352124 !important;
+    border: 1px solid #684146 !important;
+    color: #ffd0cc !important;
+  }
+
+  [data-slot="card"]:has(kbd) [data-slot="button"]:has(svg.text-green-500):hover,
+  .sticky.bottom-0:has([data-slot="button"] svg.text-green-500)
+    [data-slot="button"]:has(svg.text-green-500):hover {
+    background: #224832 !important;
+  }
+
+  [data-slot="card"]:has(kbd) [data-slot="button"]:has(svg.text-red-500):hover,
+  .sticky.bottom-0:has([data-slot="button"] svg.text-red-500)
+    [data-slot="button"]:has(svg.text-red-500):hover {
+    background: #472a2f !important;
+  }
+
+  /* Improve contrast and structure inside the buy/sell dialog. */
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) .text-muted-foreground {
+    color: #a8a8a8 !important;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) [data-slot="dialog-description"],
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) label {
+    color: #cfcfcf !important;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) [role="tablist"] {
+    background: #040404 !important;
+    border: 1px solid #222222;
+    border-radius: 0.5rem !important;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) [role="tab"] {
+    border: 1px solid transparent !important;
+    border-radius: 0.375rem !important;
+    color: #a8a8a8 !important;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"])
+    [role="tab"]:first-child[aria-selected="true"] {
+    background: #193626 !important;
+    border-color: #315c40 !important;
+    color: #c4f0d0 !important;
+    box-shadow: none !important;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"])
+    [role="tab"]:last-child[aria-selected="true"] {
+    background: #352124 !important;
+    border-color: #684146 !important;
+    color: #ffd0cc !important;
+    box-shadow: none !important;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) [role="tab"]:focus-visible {
+    outline: 2px solid var(--ring) !important;
+    outline-offset: 1px;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) [data-slot="input"] {
+    background: #040404 !important;
+    border-color: #2e2e2e !important;
+    color: #f0f0f0 !important;
+    font-size: 1rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) .grid.grid-cols-4 > [data-slot="button"],
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) [data-slot="input"] + [data-slot="button"] {
+    background: #1c1c1c !important;
+    border: 1px solid #2e2e2e !important;
+    color: #e5e5e5 !important;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) .grid.grid-cols-4 > [data-slot="button"]:hover,
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) [data-slot="input"] + [data-slot="button"]:hover {
+    background: #272727 !important;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"]) [class~="bg-muted/50"] {
+    background: #151515 !important;
+  }
+
+  [data-slot="dialog-content"]:has([aria-label="Trade side"])
+    [data-slot="dialog-footer"] > [data-slot="button"]:first-child {
+    background: #1c1c1c !important;
+    border: 1px solid #2e2e2e !important;
+    color: #e5e5e5 !important;
+  }
+
+  [data-slot="dialog-content"]:has(
+      [aria-label="Trade side"] > [role="tab"]:first-child[aria-selected="true"]
+    )
+    [data-slot="dialog-footer"] > [data-slot="button"]:last-child {
+    background: #28603d !important;
+    border: 1px solid #3c7852 !important;
+    color: #f0fff4 !important;
+  }
+
+  [data-slot="dialog-content"]:has(
+      [aria-label="Trade side"] > [role="tab"]:last-child[aria-selected="true"]
+    )
+    [data-slot="dialog-footer"] > [data-slot="button"]:last-child {
+    background: #8f3438 !important;
+    border: 1px solid #b55257 !important;
+    color: #fff5f4 !important;
+  }
+
+  /* Soften the small home-page sparkline turns without changing price colors. */
+  svg[viewBox="0 0 100 32"] > path[fill="none"] {
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+    stroke-width: 2px !important;
+  }
+
+  /* Tables get quiet horizontal rules, not boxed-in cells. */
+  [data-slot="table-head"] {
+    color: var(--muted-foreground) !important;
+  }
+
+  [data-slot="table-row"] {
+    border-bottom-color: color-mix(in srgb, var(--border) 70%, transparent) !important;
+  }
+
+  [data-slot="table-row"]:hover {
+    background-color: color-mix(in srgb, var(--muted) 65%, transparent) !important;
+  }
+
+  [data-slot="separator"],
+  [data-slot="dropdown-menu-separator"] {
+    background-color: color-mix(in srgb, var(--border) 70%, transparent) !important;
+  }
+
+  /* Treemap tiles keep their gain/loss colors, but lose the bright white grid. */
+  .apexcharts-treemap-rect {
+    stroke: var(--background) !important;
+    stroke-width: 1px !important;
+  }
+
+  .apexcharts-tooltip {
+    border-color: var(--border) !important;
+    box-shadow: 0 12px 32px rgb(0 0 0 / 28%) !important;
+  }
+
+  /* A smaller, subdued scrollbar that stays visible when needed. */
+  * {
+    scrollbar-color: #2e2e2e transparent;
+    scrollbar-width: thin;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #2e2e2e;
+    border: 2px solid var(--background);
+    border-radius: 999px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: #434343;
+  }
+}
